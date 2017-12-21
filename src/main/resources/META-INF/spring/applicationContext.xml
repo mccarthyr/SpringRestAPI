@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd 
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+
+	<context:component-scan base-package="com.fireduptech.spring.rest.domain, com.fireduptech.spring.rest.dao, com.fireduptech.spring.rest.service" />
+
+
+	<context:property-placeholder location="classpath*:META-INF/config/database.properties" />
+
+
+
+	<bean class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" id="dataSource" >
+		<property name="driverClassName" value="${database.driverClassName}" />
+		<property name="url" value="${database.url}" />
+		<property name="username" value="${database.username}" />
+		<property name="password" value="${database.password}" />
+	</bean>
+
+	<bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate" >
+		<constructor-arg index="0" ref="dataSource" />
+	</bean>
+
+
+	<!--  Spring Data JPA -->
+	<!--  The base-package specifies the package and its sub-packages to scan for Spring Data JPA repositories -->
+	<jpa:repositories base-package="com.fireduptech.spring.rest.repository" />
+
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.fireduptech.springsecurity" />
+		<property name="jpaVendorAdapter" ref="hibernateVendorAdapter" />
+		<property name="jpaProperties" ref="props" />
+	</bean>
+
+
+	<bean id="hibernateVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+
+	<util:properties id="props" >
+		<prop key="hibernate.show_sql">true</prop>
+		<prop key="hibernate.id.new_generator_mappings">false</prop>
+	</util:properties>
+	
+	<!-- The <annotation-driven> element of Spring's TX Schema enables Declarative transactionManageraction Management -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" >
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+
+
+
+</beans>
+
+
+
