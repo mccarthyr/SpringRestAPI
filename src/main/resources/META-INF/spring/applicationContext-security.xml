@@ -53,6 +53,11 @@
 
 			authentication-success-handler-ref="authSuccessHandler" />
 
+		<logout 
+			logout-url="/api/logout" 
+			delete-cookies="JSESSIONID"
+			success-handler-ref="customLogoutSuccessHandler"
+			/> 
 		<!-- <logout logout-url="/athleteaccountv2/logout" />  -->
 
 		<!--
@@ -71,6 +76,8 @@
 	<beans:bean id = "authSuccessHandler" class = "com.fireduptech.spring.rest.security.MyAuthenticationSuccessHandler" />
 
 	<beans:bean id = "customAccessDeniedHandler" class = "com.fireduptech.spring.rest.security.MyCustomAccessDeniedHandler" />
+
+	<beans:bean id = "customLogoutSuccessHandler" class = "com.fireduptech.spring.rest.security.MyLogoutSuccessHandler" />
 
 
 	<global-method-security pre-post-annotations="enabled" >

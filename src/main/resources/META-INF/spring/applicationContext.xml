@@ -37,7 +37,7 @@
 
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.fireduptech.springsecurity" />
+		<property name="packagesToScan" value="com.fireduptech.spring.rest" />
 		<property name="jpaVendorAdapter" ref="hibernateVendorAdapter" />
 		<property name="jpaProperties" ref="props" />
 	</bean>
