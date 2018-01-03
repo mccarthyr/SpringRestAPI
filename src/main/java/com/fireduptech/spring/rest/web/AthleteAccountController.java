@@ -77,7 +77,7 @@ public class AthleteAccountController {
 	}*/
 
 
-	@SuppressWarnings("unchecked")
+/*	@SuppressWarnings("unchecked")
 	@RequestMapping( value= "/list", method = RequestMethod.GET )
 	@ResponseBody
 	@ResponseStatus( code = HttpStatus.OK )
@@ -90,6 +90,37 @@ public class AthleteAccountController {
 		Iterator<GrantedAuthority> iterator = authorities.iterator();
 
 		if ( iterator.hasNext() ) {
+*/
+			/*
+			String role = (iterator.next()).getAuthority();
+			if ( role.equalsIgnoreCase( "ROLE_ADMIN" ) ) {
+			*/
+				// acdList - athlete account details list
+//				modelData.put( "acdList", athleteAccountService.getAllAthleteAccounts() );
+			/*		
+			} */
+
+/*		}
+
+		return modelData;
+
+	}
+*/
+
+
+	//@SuppressWarnings("unchecked")
+	@RequestMapping( value= "/list", method = RequestMethod.GET )
+	@ResponseBody
+	@ResponseStatus( code = HttpStatus.OK )
+	public ResponseEntity<Map<String, List<AthleteAccount>>> listAthleteAccounts( Principal principal ) {
+
+		Map<String, List<AthleteAccount>> modelData = new HashMap<String, List<AthleteAccount>>();
+
+//		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+
+//		Iterator<GrantedAuthority> iterator = authorities.iterator();
+
+//		if ( iterator.hasNext() ) {
 
 			/*
 			String role = (iterator.next()).getAuthority();
@@ -99,15 +130,23 @@ public class AthleteAccountController {
 				modelData.put( "acdList", athleteAccountService.getAllAthleteAccounts() );
 			/*		
 			} */
-		}
+//		}
 
-		return modelData;
+
+		return new ResponseEntity<Map<String, List<AthleteAccount>>>( modelData, HttpStatus.OK );
+
+//		return modelData;
 
 	}
 
 
 
+
+
+	
 	@RequestMapping( params = "acAction=view", method = RequestMethod.GET )
+	@ResponseBody
+	@ResponseStatus( code = HttpStatus.OK )
 	public ResponseEntity<AthleteAccount> viewAthleteAccount( @RequestParam( value = "athleteAccountId" ) int aaId ) {
 
 		return new ResponseEntity<AthleteAccount>( athleteAccountService.getAthleteAccount( aaId ), HttpStatus.OK );
@@ -134,7 +173,7 @@ public class AthleteAccountController {
 	@ResponseBody
 	@ResponseStatus( code = HttpStatus.BAD_REQUEST )
 	public String handleException( Exception ex ) {
-		return ex.getMessage();
+		return ex.getMessage() + " FROM ME!";
 	}
 
 }

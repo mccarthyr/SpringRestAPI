@@ -16,8 +16,10 @@ public class MyCustomAccessDeniedHandler implements AccessDeniedHandler {
 	@Override
 	public void handle( final HttpServletRequest request, final HttpServletResponse response, final AccessDeniedException exception ) throws IOException, ServletException {
 
-		response.getOutputStream().print( "Access to this resource is denied" );
+		response.getOutputStream().print( "Access to this resource is denied --- THIS IS FROM MY_CUSTOM_ACCESS_DENIED_HANDLER !" );
 		response.setStatus( 403 );
+		response.getWriter().flush();
 	}
 
 }
+

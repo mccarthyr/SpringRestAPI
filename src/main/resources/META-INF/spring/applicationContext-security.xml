@@ -31,19 +31,22 @@
 
 	<http use-expressions="true"  entry-point-ref="restAuthenticationEntryPoint">
 
-		<!-- <access-denied-handler error-page="/athleteaccountv2/access-denied" /> -->
-		<access-denied-handler ref="customAccessDeniedHandler" />
-
 		<!--
 		<intercept-url pattern="/athleteaccountv2/login" access="permitAll" />
 		<intercept-url pattern="/athleteaccountv2/registration" access="permitAll" />
 		<intercept-url pattern="/athleteaccountv2/register/user" access="permitAll" />
 		-->
 
+		<intercept-url pattern="/api/athleteAccount/*" access="hasAnyRole('ROLE_ATHLETE', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/api/*" access="hasAnyRole('ROLE_ATHLETE', 'ROLE_ADMIN')" />
+
 		<!-- *** NOTE *** OR COULD TRY IT THIS WAY
 		<intercept-url pattern="/api/*" access="isAuthenticated()" />
 		-->
+
+		<!-- <access-denied-handler error-page="/athleteaccountv2/access-denied" /> -->
+		<access-denied-handler ref="customAccessDeniedHandler" />
+
 
 		<csrf disabled="true" />
 
@@ -71,8 +74,13 @@
 
 	<beans:bean id = "restAuthenticationEntryPoint" class = "com.fireduptech.spring.rest.security.MyRestAuthenticationEntryPoint" />
 
+	<!--
 	<beans:bean id = "authFailureHandler" class = "org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" />
-	
+	-->
+
+	<beans:bean id = "authFailureHandler" class = "com.fireduptech.spring.rest.security.MyAuthenticationFailureHandler" />
+
+
 	<beans:bean id = "authSuccessHandler" class = "com.fireduptech.spring.rest.security.MyAuthenticationSuccessHandler" />
 
 	<beans:bean id = "customAccessDeniedHandler" class = "com.fireduptech.spring.rest.security.MyCustomAccessDeniedHandler" />

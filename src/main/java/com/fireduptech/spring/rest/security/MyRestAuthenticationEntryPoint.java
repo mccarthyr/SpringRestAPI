@@ -1,6 +1,7 @@
 package com.fireduptech.spring.rest.security;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +19,23 @@ public final class MyRestAuthenticationEntryPoint implements AuthenticationEntry
 	@Override
 	public void commence( final HttpServletRequest request, final HttpServletResponse response, final AuthenticationException authException ) throws IOException {
 
-		response.sendError( HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized" );		
+
+		//response.sendError( HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized - THIS IS FROM ME ALSO!!!<--- " );		
+
+		response.setStatus( HttpServletResponse.SC_UNAUTHORIZED );
+
+		PrintWriter writer = response.getWriter();
+		//writer.write( exception.getMessage() );
+		writer.write( " ---> THIS IS FROM MY MY_REST_AUTHENTICATION_ENTRY_POINT !" );
+		writer.flush();
+
+
+
+
 	}
 
 }
+
+
+
+

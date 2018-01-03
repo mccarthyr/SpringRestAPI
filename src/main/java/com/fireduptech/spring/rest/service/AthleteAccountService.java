@@ -10,8 +10,12 @@ import com.fireduptech.spring.rest.domain.AthleteAccount;
 
 public interface AthleteAccountService {
 
-	@PreAuthorize( " hasPermission( #athleteAccountId, 'com.fireduptech.spring.rest.domain.AthleteAccount', read ) or " 
+
+
+	/*@PreAuthorize( " hasPermission( #athleteAccountId, 'com.fireduptech.spring.rest.domain.AthleteAccount', read ) or " 
 								+ " hasPermission( #athleteAccountId, 'com.fireduptech.spring.rest.domain.AthleteAccount', admin ) " )
+	*/
+	@PreAuthorize( " hasAnyRole( 'ROLE_ADMIN', 'ROLE_ATHLETE' ) " )
 	AthleteAccount getAthleteAccount( int athleteAccountId  );
 
 
