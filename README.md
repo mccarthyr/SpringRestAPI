@@ -6,7 +6,8 @@ Configued with FasterXML Jackson for JSON Serialisation/Deserialisation.
 Both the client and server components are packaged in the same project here. 
 
 Run:
-mvn tomcat7:redeploy -Dtomcat.username=<USERNAME> -Dtomcat.password=<PASSWORD>
+mvn tomcat7:redeploy -Dtomcat.username=<YOUR_USERNAME> -Dtomcat.password=<YOUR_PASSWORD>
+
 to deploy the code to Tomcat.
 
 Then run:
