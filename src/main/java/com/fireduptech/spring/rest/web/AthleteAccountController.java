@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ArrayList;
 
 import java.security.Principal;
 
@@ -47,106 +48,29 @@ public class AthleteAccountController {
 	private AthleteAccountService athleteAccountService;
 
 
-	/*
-	 * This will list all the Athlete Accounts only for ROLE_ADMIN
-	 */
-	/*
-	@SuppressWarnings("unchecked")
-	@RequestMapping( value= "/list", method = RequestMethod.GET )
-	public ModelAndView listAthleteAccounts( Principal principal ) {
 
-		Map<String, List<AthleteAccount>> modelData = new HashMap<String, List<AthleteAccount>>();
+	@RequestMapping( value= "/list", method = RequestMethod.GET )
+	public ResponseEntity<List<AthleteAccount>> listAthleteAccounts( Principal principal ) {
+
+		/* This will list all the Athlete Accounts only for ROLE_ADMIN
 
 		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-
 		Iterator<GrantedAuthority> iterator = authorities.iterator();
-
 		if ( iterator.hasNext() ) {
-
 			
 			String role = (iterator.next()).getAuthority();
-			if ( role.equalsIgnoreCase( "ROLE_ADMIN" ) ) {
-			
-				// acdList - athlete account details list
-				modelData.put( "acdList", athleteAccountService.getAllAthleteAccounts() );
-		
-			} 
+			if ( role.equalsIgnoreCase( "ROLE_ADMIN" ) ) {			
+				List<AthleteAccount> athleteAccountsList = athleteAccountService.getAllAthleteAccounts();					
+			}
 		}
+		*/
 
-		return new ModelAndView( "athleteAccountsList", modelData );
-	}*/
-
-
-/*	@SuppressWarnings("unchecked")
-	@RequestMapping( value= "/list", method = RequestMethod.GET )
-	@ResponseBody
-	@ResponseStatus( code = HttpStatus.OK )
-	public Map<String, List<AthleteAccount>> listAthleteAccounts( Principal principal ) {
-
-		Map<String, List<AthleteAccount>> modelData = new HashMap<String, List<AthleteAccount>>();
-
-		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-
-		Iterator<GrantedAuthority> iterator = authorities.iterator();
-
-		if ( iterator.hasNext() ) {
-*/
-			/*
-			String role = (iterator.next()).getAuthority();
-			if ( role.equalsIgnoreCase( "ROLE_ADMIN" ) ) {
-			*/
-				// acdList - athlete account details list
-//				modelData.put( "acdList", athleteAccountService.getAllAthleteAccounts() );
-			/*		
-			} */
-
-/*		}
-
-		return modelData;
-
-	}
-*/
-
-
-	//@SuppressWarnings("unchecked")
-	@RequestMapping( value= "/list", method = RequestMethod.GET )
-	@ResponseBody
-	@ResponseStatus( code = HttpStatus.OK )
-	public ResponseEntity<Map<String, List<AthleteAccount>>> listAthleteAccounts( Principal principal ) {
-
-		Map<String, List<AthleteAccount>> modelData = new HashMap<String, List<AthleteAccount>>();
-
-//		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-
-//		Iterator<GrantedAuthority> iterator = authorities.iterator();
-
-//		if ( iterator.hasNext() ) {
-
-			/*
-			String role = (iterator.next()).getAuthority();
-			if ( role.equalsIgnoreCase( "ROLE_ADMIN" ) ) {
-			*/
-				// acdList - athlete account details list
-				modelData.put( "acdList", athleteAccountService.getAllAthleteAccounts() );
-			/*		
-			} */
-//		}
-
-
-		return new ResponseEntity<Map<String, List<AthleteAccount>>>( modelData, HttpStatus.OK );
-
-//		return modelData;
-
+		return new ResponseEntity<List<AthleteAccount>>( athleteAccountService.getAllAthleteAccounts(), HttpStatus.OK );
 	}
 
 
 
-
-
-	
 	@RequestMapping( params = "acAction=view", method = RequestMethod.GET )
-	@ResponseBody
-	@ResponseStatus( code = HttpStatus.OK )
 	public ResponseEntity<AthleteAccount> viewAthleteAccount( @RequestParam( value = "athleteAccountId" ) int aaId ) {
 
 		return new ResponseEntity<AthleteAccount>( athleteAccountService.getAthleteAccount( aaId ), HttpStatus.OK );
@@ -154,26 +78,11 @@ public class AthleteAccountController {
 
 
 
-	/*
-	@RequestMapping( params = "acAction=view", method = RequestMethod.GET )
-	public ModelAndView viewAthleteAccount( @RequestParam( value = "athleteAccountId" ) int aaId ) {
-
-		AthleteAccount athleteAccount = athleteAccountService.getAthleteAccount( aaId );
-
-		ModelMap modelMap = new ModelMap();
-		modelMap.addAttribute( athleteAccount );
-
-		return new ModelAndView( "editAthleteAccountForm", modelMap );
-	}*/
-
-
-
-
 	@ExceptionHandler
 	@ResponseBody
 	@ResponseStatus( code = HttpStatus.BAD_REQUEST )
 	public String handleException( Exception ex ) {
-		return ex.getMessage() + " FROM ME!";
+		return ex.getMessage();
 	}
 
 }

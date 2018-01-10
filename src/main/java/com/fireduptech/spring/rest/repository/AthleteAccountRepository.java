@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.fireduptech.spring.rest.domain.AthleteAccount;
 
+import javax.persistence.*;
+
+
 
 public interface AthleteAccountRepository extends JpaRepository<AthleteAccount, Integer> {
 

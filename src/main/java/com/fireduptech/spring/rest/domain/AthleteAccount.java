@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
+
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,9 +18,10 @@ import java.time.*;
 import java.time.format.*;
 
 
+
 @Entity( name = "AthleteAccount" )
 @Table( name = "athlete_account" )
-public class AthleteAccount {
+public class AthleteAccount {	
 
 
 	@GeneratedValue( strategy = GenerationType.AUTO )
@@ -53,6 +55,7 @@ public class AthleteAccount {
 
 	public AthleteAccount( String email, String firstName, String lastName, String accountType, String primaryActivity ) {
 
+
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -72,11 +75,12 @@ public class AthleteAccount {
 		this.id = id;
 	}
 
-
+	
 	public String getEmail() {
 		return email;
 	}
 
+	
 	public void setEmail( String email ) {
 		this.email = email;
 	}
