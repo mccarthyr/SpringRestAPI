@@ -1,6 +1,6 @@
 # SpringRestAPI - Learning Project
 
-Uses some hardcoded endpoints for basic REST GET calls. 
+Uses some hardcoded endpoints for basic Authenticated REST GET calls. 
 Configued with FasterXML Jackson for JSON Serialisation/Deserialisation.
 
 Both the client and server components are packaged in the same project here. 
