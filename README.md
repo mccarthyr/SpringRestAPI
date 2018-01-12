@@ -23,6 +23,9 @@ springRestApi/api/athleteAccount?acAction=view&athleteAccountId=34
 
 The database and backend set up here is the as the one used in my Spring Security learning project (https://github.com/mccarthyr/springsecurity) except the Controller has been modified to return a ResponseEntity and most of the CRUD features have been removed for this small REST version, so it is a skimmed down codebase version but operates the same database structure.
 
+The database set up file, SpringSecurityAclRestApiDatabase.sql , is the same database as the Spring Security learning project and has a few basic entries so that the REST client (which contains a hardcoded login value) will execute. Again this is for learning purposes to provide an outline so the code is NOT of production quality.
+
+
 
 
 
