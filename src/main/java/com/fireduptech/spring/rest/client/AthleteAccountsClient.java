@@ -25,46 +25,6 @@ import com.fireduptech.spring.rest.domain.AthleteAccount;
 import org.springframework.util.*;
 
 
-
-// *** NOTE *** The code here is for ---> WEBSITE ARTICLE <---
-// -- CONFIGURING JACKSON OBJECT MAPPER AND CONVERTER, REMOVING EXISTING SPRING ONE AND ADDING NEW ONE
-/*
-	import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-	import com.fasterxml.jackson.databind.ObjectMapper;
-	import com.fasterxml.jackson.databind.DeserializationFeature;
-	import org.springframework.http.converter.HttpMessageConverter;
-
-		ObjectMapper omp = new ObjectMapper();
-		omp.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		omp.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-		//omp.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-		MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
-		messageConverter.setPrettyPrint(false);
-
-		messageConverter.setObjectMapper( omp );
-
-		// Removes existing Jackson converter and adds the new one that has been just created and configured
-		restTemplate.getMessageConverters().removeIf(m -> m.getClass().getName().equals(MappingJackson2HttpMessageConverter.class.getName()));
-		restTemplate.getMessageConverters().add(messageConverter);
-		List l = restTemplate.getMessageConverters();
-		// Prints each item (converter) in the list
-		l.forEach( converter -> System.out.println( converter ) );
-	*/
-		/* Printed list of existing MessageConverters already registered with Spring:
-
-		[org.springframework.http.converter.ByteArrayHttpMessageConverter@2c69b784, 
-		org.springframework.http.converter.StringHttpMessageConverter@75ab00bc, 
-		org.springframework.http.converter.ResourceHttpMessageConverter@3b4dbe3, 
-		org.springframework.http.converter.xml.SourceHttpMessageConverter@6449e7a8, 
-		org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter@5fdb932, 
-		org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter@287ee7d1, 
-		org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@db05afe]
-		*/
-
-
-
-
 public class AthleteAccountsClient {
 
 
