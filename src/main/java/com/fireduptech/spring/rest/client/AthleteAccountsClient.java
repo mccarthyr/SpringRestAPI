@@ -97,7 +97,7 @@ public class AthleteAccountsClient {
 		headers.add( "Accept", "application/json" );
 
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
-		body.add( "username", "athlete1" );
+		body.add( "username", "atheteAdmin@testing.com" );
 		body.add( "password", "test" );		
 
 		HttpEntity<?> httpEntity = new HttpEntity<Object>( body, headers );
